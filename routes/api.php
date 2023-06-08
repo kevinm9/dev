@@ -19,3 +19,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/mi', [miController::class, 'index']);
+
+Route::apiResource('products', miController::class);

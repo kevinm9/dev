@@ -102,7 +102,12 @@ class miController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:255'
+        ]);
+
+        $item = Categoria::create($validatedData);
+        return response()->json($item, 201);
     }
 
     /**
