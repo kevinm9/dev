@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\miController;
+use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\FormasdePagoController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,4 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/mi', [miController::class, 'index']);
 
-Route::apiResource('products', miController::class);
+Route::apiResource('categorias', CategoriaController::class);
+Route::apiResource('formasdepagos', FormasdePagoController::class);
