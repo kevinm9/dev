@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUpdateFormasdepagoRequest;
 use App\Http\Requests\UpdateCategoriaRequest;
 use App\Models\Formasdepago;
 use Illuminate\Http\Request;
@@ -25,7 +26,7 @@ class FormasdePagoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UpdateCategoriaRequest $request)
+    public function store(StoreUpdateFormasdepagoRequest $request)
     {
         $Formasdepago = Formasdepago::create($request->validated());
         return response()->json($Formasdepago, 201);
@@ -53,7 +54,7 @@ class FormasdePagoController extends Controller
      * @param  \App\Models\Formasdepago  $formasdepago
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCategoriaRequest $request,$id)
+    public function update(StoreUpdateFormasdepagoRequest $request,$id)
     {
         $Formasdepago = Formasdepago::find($id);
         if (!$Formasdepago) {
