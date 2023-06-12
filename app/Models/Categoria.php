@@ -11,7 +11,10 @@ class Categoria extends Model
     protected $fillable = [
         'nombre',
     ];
-
+    protected $casts = [
+        'created_at' => 'date:Y-m-d H:i:s',
+        'updated_at' => 'date:Y-m-d H:i:s',
+    ];
     public function productos()
     {
         return $this->hasMany(Producto::class);

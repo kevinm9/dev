@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\miController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\FormasdePagoController;
+use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\FacturaController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,3 +26,7 @@ Route::get('/mi', [miController::class, 'index']);
 
 Route::apiResource('categorias', CategoriaController::class);
 Route::apiResource('formasdepagos', FormasdePagoController::class);
+Route::apiResource('facturas', FacturaController::class);
+Route::apiResource('productos', ProductoController::class);
+
+

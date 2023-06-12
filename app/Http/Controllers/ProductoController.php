@@ -13,9 +13,22 @@ class ProductoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $Productos = Producto::all();
+        $perPage = isset($request->per_page) ? intval($request->per_page) : 10;
+        $query = Producto::query();
+        if (isset($request->keyword)) {
+            $query->where('nombre', 'like', '%' . $request->keyword . '%')
+            ->orWhere('nombre', 'like', '%' . $request->keyword . '%')
+            ->orWhere('precio', 'like', '%' . $request->keyword . '%');
+        }
+        //asc o desc
+        if ($request->has(['field', 'sortOrder']) && $request->field != null) {
+            $query->orderBy(request('field'), request('sortOrder'));
+        }
+        $query->with('categoria');
+        $Productos = $query->paginate($perPage);
+
         return response()->json($Productos);
     }
 
@@ -39,7 +52,8 @@ class ProductoController extends Controller
      */
     public function show($id)
     {
-        $Producto = Producto::find($id);
+        $Producto = Producto::find($id)->load(['categoria']);
+        //$Producto = Producto::where('id',$id)->with(['facturas'])->get();
         if (!$Producto) {
             return response()->json(['mensaje' => 'Producto no encontrado'], 404);
         }
@@ -78,4 +92,6 @@ class ProductoController extends Controller
         $Producto->delete();
         return response()->json(['message' => 'Producto eliminado']);
     }
+
+
 }

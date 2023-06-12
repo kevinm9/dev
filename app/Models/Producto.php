@@ -15,6 +15,10 @@ class Producto extends Model
         'precio',
         'stock',
     ];
+    protected $casts = [
+        'created_at' => 'date:Y-m-d H:i:s',
+        'updated_at' => 'date:Y-m-d H:i:s',
+    ];
 
     public function categoria(){
         return $this->belongsTo(Categoria::class);

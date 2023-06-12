@@ -9,17 +9,26 @@ class Factura extends Model
 {
     use HasFactory;
 
+    //protected $dates = ['created_at'];
+
+    protected $casts = [
+        'created_at' => 'date:Y-m-d H:i:s',
+        'updated_at' => 'date:Y-m-d H:i:s',
+    ];
+
     protected $fillable = [
         'formasdepago_id',
         'cliente_id',
         'total',
     ];
 
-    public function formasdepago(){
+    public function formasdepago()
+    {
         return $this->belongsTo(Formasdepago::class);
     }
 
-    public function cliente(){
+    public function cliente()
+    {
         return $this->belongsTo(User::class, 'cliente_id', 'id');
     }
 
@@ -32,5 +41,4 @@ class Factura extends Model
     {
         return $this->belongsToMany(Producto::class)->withPivot('cantidad');
     }
-
 }

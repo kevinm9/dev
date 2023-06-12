@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUpdateFacturaRequest;
 use App\Models\Factura;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class FacturaController extends Controller
@@ -13,9 +14,25 @@ class FacturaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $Facturas = Factura::all();
+        $perPage = isset($request->per_page) ? intval($request->per_page) : 10;
+        $Facturas = Factura::query();
+        if(isset($request->start_date)) {
+            $Facturas->where('created_at', '>=', $request->start_date);
+        }
+        if(isset($request->end_date)) {
+            $Facturas->where('created_at', '<=', $request->end_date . ' 23:59:59');
+        }
+        if(isset($request->cliente_id)) {
+            $Facturas->where('cliente_id',$request->cliente_id);
+        }
+        if(isset($request->formasdepago_id)) {
+            $Facturas->where('formasdepago_id',$request->formasdepago_id);
+        }
+        $Facturas = $Facturas->with(['formasdepago', 'cliente', 'productos'])
+                            ->latest()
+                            ->paginate($perPage);
         return response()->json($Facturas);
     }
 
@@ -39,7 +56,7 @@ class FacturaController extends Controller
      */
     public function show($id)
     {
-        $Factura = Factura::find($id);
+        $Factura = Factura::find($id)->load(['formasdepago', 'cliente', 'productos']);
         if (!$Factura) {
             return response()->json(['mensaje' => 'Factura no encontrada'], 404);
         }
