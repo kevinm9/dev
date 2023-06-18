@@ -24,7 +24,7 @@ class StoreUpdateProductoRequest extends FormRequest
     public function rules()
     {
         return [
-            'categoria_id' => ['required', 'numeric', 'min:1', 'regex:^\d+$'], //regex:^\d+$ enteros positivo
+            'categoria_id' => ['required', 'numeric', 'min:1', 'regex:/^\d+$/'], //regex:^\d+$ enteros positivo
             'nombre' => ['required', 'string', 'max:255'],
             'precio' => ['required', 'numeric', 'between:0,9999999999.99'], //regex:/^\d+(\.\d{1,3})?$/ precio con 3 decimales
             'stock' => ['required', 'numeric', 'gt:0'],

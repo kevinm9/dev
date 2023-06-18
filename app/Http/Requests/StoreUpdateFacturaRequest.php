@@ -24,8 +24,11 @@ class StoreUpdateFacturaRequest extends FormRequest
     public function rules()
     {
         return [
-            'formasdepago_id' => ['required', 'numeric', 'min:1', 'regex:^\d+$'],
-            'cliente_id' => ['required', 'numeric', 'min:1', 'regex:^\d+$'],
+            'formasdepago_id' => ['required', 'numeric', 'min:1', 'regex:/^\d+$/', 'exists:App\Models\Formasdepago,id'],
+            'cliente_id' => ['required', 'numeric', 'min:1', 'regex:/^\d+$/', 'exists:App\Models\User,id'],
+            'productos' => 'required|array|min:1',
+            'productos.*.id' => 'required|numeric|min:1|distinct',
+            'productos.*.cantidad' => 'required|numeric|gt:0|min:1',
         ];
 
     }
