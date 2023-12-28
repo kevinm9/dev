@@ -27,8 +27,8 @@ class ProductoController extends Controller
             $query->orderBy(request('field'), request('sortOrder'));
         }
         $query->with('categoria');
-        $Productos = $query->paginate($perPage);
-
+        $perPage = $perPage > 0 ? $perPage : $query->count();
+        $Productos=$query->paginate($perPage);
         return response()->json($Productos);
     }
 
