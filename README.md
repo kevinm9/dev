@@ -52,6 +52,7 @@ rutas:
 
 ## documento de word
 
+https://github.com/kevinm9/PLANTILLA-LARAVEL-API-YT/blob/ejemplo2api/LARAVEL.docx
 
 codigo de ejemplo para codificar. 
 
