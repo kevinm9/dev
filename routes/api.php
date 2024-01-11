@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\FormasdePagoController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\FacturaController;
+use App\Http\Controllers\AuthController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -29,4 +30,11 @@ Route::apiResource('formasdepagos', FormasdePagoController::class);
 Route::apiResource('facturas', FacturaController::class);
 Route::apiResource('productos', ProductoController::class);
 
+Route::post('registro', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
+
+
+Route::middleware('auth:sanctum')->group(function() {
+    Route::get('logout', [AuthController::class, 'logout']);
+});
 

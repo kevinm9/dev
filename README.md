@@ -1,4 +1,14 @@
+´´´
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate:fresh --seed
+php artisan serve
+´´´
+
+
 ## documento de word
+
 
 codigo de ejemplo para codificar. 
 

@@ -23,12 +23,12 @@ class ProductoController extends Controller
             ->orWhere('precio', 'like', '%' . $request->keyword . '%');
         }
         //asc o desc
-        if ($request->has(['field', 'sortOrder']) && $request->field != null) {
-            $query->orderBy(request('field'), request('sortOrder'));
+        if ($request->has(['sortBy', 'sortDesc']) && isset($request->sortBy)) {
+            $query->orderBy($request->sortBy,$request->sortDesc);
         }
         $query->with('categoria');
-        $Productos = $query->paginate($perPage);
-
+        $perPage = $perPage > 0 ? $perPage : $query->count();
+        $Productos=$query->paginate($perPage);
         return response()->json($Productos);
     }
 
