@@ -22,7 +22,12 @@ class ProductoController extends Controller
             ->orWhere('nombre', 'like', '%' . $request->keyword . '%')
             ->orWhere('precio', 'like', '%' . $request->keyword . '%');
         }
-        //asc o desc
+        // Filtrar por categoría
+        if (isset($request->categoriaid)) {
+            $query->where('categoria_id', $request->categoriaid);
+        }
+
+        //sortDesc = asc o desc
         if ($request->has(['sortBy', 'sortDesc']) && isset($request->sortBy)) {
             $query->orderBy($request->sortBy,$request->sortDesc);
         }
