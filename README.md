@@ -1,10 +1,53 @@
-´´´
+
+## Project setup
+
+link proyecto frontend con vue 2 y vuetify 2:
+
+<p align="center"><a href="https://github.com/kevinm9/VUE-TOKENS-LOGIN-REGISTER-VUEX-ROUTER" target="_blank"><img src="https://miro.medium.com/v2/resize:fit:1200/1*dA0K8ZQ4yQn1Ld4JQBG4ug.png" width="400" alt="Laravel Logo"></a></p>
+
+clonar repositorio y ejecutar:
+```
 composer install
 cp .env.example .env
 php artisan key:generate
 php artisan migrate:fresh --seed
 php artisan serve
-´´´
+```
+
+rutas:
+
+```
+  GET|HEAD        / ..................................................................................................................................................
+  POST            _ignition/execute-solution ........................................... ignition.executeSolution › Spatie\LaravelIgnition › ExecuteSolutionController
+  GET|HEAD        _ignition/health-check ....................................................... ignition.healthCheck › Spatie\LaravelIgnition › HealthCheckController
+  POST            _ignition/update-config .................................................... ignition.updateConfig › Spatie\LaravelIgnition › UpdateConfigController
+  GET|HEAD        api/categorias ........................................................................................ categorias.index › CategoriaController@index
+  POST            api/categorias ........................................................................................ categorias.store › CategoriaController@store
+  GET|HEAD        api/categorias/{categoria} .............................................................................. categorias.show › CategoriaController@show
+  PUT|PATCH       api/categorias/{categoria} .......................................................................... categorias.update › CategoriaController@update
+  DELETE          api/categorias/{categoria} ........................................................................ categorias.destroy › CategoriaController@destroy
+  GET|HEAD        api/facturas .............................................................................................. facturas.index › FacturaController@index
+  POST            api/facturas .............................................................................................. facturas.store › FacturaController@store
+  GET|HEAD        api/facturas/{factura} ...................................................................................... facturas.show › FacturaController@show
+  PUT|PATCH       api/facturas/{factura} .................................................................................. facturas.update › FacturaController@update
+  DELETE          api/facturas/{factura} ................................................................................ facturas.destroy › FacturaController@destroy
+  GET|HEAD        api/formasdepagos ............................................................................... formasdepagos.index › FormasdePagoController@index
+  POST            api/formasdepagos ............................................................................... formasdepagos.store › FormasdePagoController@store
+  GET|HEAD        api/formasdepagos/{formasdepago} .................................................................. formasdepagos.show › FormasdePagoController@show
+  PUT|PATCH       api/formasdepagos/{formasdepago} .............................................................. formasdepagos.update › FormasdePagoController@update
+  DELETE          api/formasdepagos/{formasdepago} ............................................................ formasdepagos.destroy › FormasdePagoController@destroy
+  POST            api/login ..................................................................................................................... AuthController@login
+  GET|HEAD        api/logout ................................................................................................................... AuthController@logout
+  GET|HEAD        api/mi .......................................................................................................................... miController@index
+  GET|HEAD        api/productos ........................................................................................... productos.index › ProductoController@index
+  POST            api/productos ........................................................................................... productos.store › ProductoController@store
+  GET|HEAD        api/productos/{producto} .................................................................................. productos.show › ProductoController@show
+  PUT|PATCH       api/productos/{producto} .............................................................................. productos.update › ProductoController@update
+  DELETE          api/productos/{producto} ............................................................................ productos.destroy › ProductoController@destroy
+  POST            api/registro ............................................................................................................... AuthController@register
+  GET|HEAD        api/user ...........................................................................................................................................
+  GET|HEAD        sanctum/csrf-cookie .............................................................. sanctum.csrf-cookie › Laravel\Sanctum › CsrfCookieController@show
+```
 
 
 ## documento de word
