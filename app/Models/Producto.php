@@ -14,6 +14,7 @@ class Producto extends Model
         'nombre',
         'precio',
         'stock',
+        'imagen'
     ];
     protected $casts = [
         'created_at' => 'date:Y-m-d H:i:s',

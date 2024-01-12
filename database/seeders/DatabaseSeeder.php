@@ -109,7 +109,7 @@ class DatabaseSeeder extends Seeder
             'categoria_id' => 3
         ]);
 
-        Producto::factory(40)->create();
+        Producto::factory(30)->create();
 
         // facturas
 
