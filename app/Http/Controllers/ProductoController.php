@@ -47,6 +47,25 @@ class ProductoController extends Controller
     public function store(StoreUpdateProductoRequest $request)
     {
         $Producto = Producto::create($request->validated());
+
+        if (isset($request->imagen64)) {
+            $imagenBase64 = $request->imagen64;
+            $nombreimagenBase64 = $request->imagennombre64 ?? uniqid()."foto.png";
+            $imagenDecodificada = base64_decode($imagenBase64);
+            $nombreImagen = uniqid().$nombreimagenBase64;
+    
+            $rutaDirectorio = public_path('imagenes');
+            if (!file_exists($rutaDirectorio)) {
+                mkdir($rutaDirectorio, 0777, true);
+            }
+            $rutaImagen = public_path('imagenes/'.$nombreImagen);
+    
+            file_put_contents($rutaImagen, $imagenDecodificada);
+    
+            $Producto->imagen = url('imagenes/' . $nombreImagen);
+            $Producto->save();
+        }
+
         return response()->json($Producto, 201);
     }
 
@@ -81,9 +100,9 @@ class ProductoController extends Controller
         }
         $Producto->update($request->validated());
 
-        if ($request->imagen64) {
+        if (isset($request->imagen64)) {
             $imagenBase64 = $request->imagen64;
-            $nombreimagenBase64 = $request->imagennombre64 ?? "foto.png";
+            $nombreimagenBase64 = $request->imagennombre64 ?? uniqid()."foto.png";
             $imagenDecodificada = base64_decode($imagenBase64);
             $nombreImagen = uniqid().$nombreimagenBase64;
     
