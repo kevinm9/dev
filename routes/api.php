@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClienteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\miController;
@@ -29,6 +30,7 @@ Route::apiResource('categorias', CategoriaController::class);
 Route::apiResource('formasdepagos', FormasdePagoController::class);
 Route::apiResource('facturas', FacturaController::class);
 Route::apiResource('productos', ProductoController::class);
+Route::apiResource('clientes', ClienteController::class);
 
 Route::post('registro', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
