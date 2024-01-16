@@ -32,13 +32,16 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         $validador = Validator::make($request->all(), [
-            'nombre' => 'required',
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required',
         ]);
         if ($validador->fails()) {
             $errores = $validador->errors();
             return response()->json(['errores' => $errores], 422);
         }
         $datavalidada = $validador->validated();
+        $datavalidada['password'] = bcrypt($datavalidada['password']);
         $cliente = User::create($datavalidada);
         return response()->json($cliente, 201);
     }
@@ -67,11 +70,19 @@ class ClienteController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validador = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email',
+        ]);
+        if ($validador->fails()) {
+            $errores = $validador->errors();
+            return response()->json(['errores' => $errores], 422);
+        }
         $cliente = User::find($id);
         if (!$cliente) {
             return response()->json(['message' => 'User no encontrada'], 404);
         }
-        $cliente->update($request->validated());
+        $cliente->update($validador->validated());
         return response()->json($cliente);
     }
 
