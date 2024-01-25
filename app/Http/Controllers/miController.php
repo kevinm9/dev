@@ -8,6 +8,7 @@ use App\Models\Producto;
 use App\Models\Formasdepago;
 use App\Models\Categoria;
 use App\Models\Factura;
+use Spatie\Permission\Models\Role;
 
 class miController extends Controller
 {
@@ -62,7 +63,7 @@ class miController extends Controller
 
         // $s = $c1->productos()->save($p4);
 
-         $user = User::find(1);
+        $user = User::find($request->id);
 
         // $factura = Factura::create([
         //     'formasdepago_id' => 2,
@@ -83,12 +84,29 @@ class miController extends Controller
         // $factura->total = $total;
         // $factura->save();
 
-        return User::where('id',$request->id)->with([
-            'facturas' => [
-                'formasdepago',
-                'productos',
-            ],
-        ])->get();
+        //$data1 = User::with('permissions')->get();
+        $data1 = $user->getPermissionsViaRoles();
+
+        return response()->json([
+            'mensaje' => $data1
+        ], 500);
+
+        // if (!$user->hasRole('admin')) {
+        //     return response()->json(['mensaje' => 'El usuario no es un administrador'], 500);
+
+        // }
+
+        // if (!$user->can('save products')) {
+        //     return response()->json(['mensaje' => 'El usuario no tiene permiso para guardar un producto'], 500);
+        // }
+
+
+        // return User::where('id', $user->id)->with([
+        //     'facturas' => [
+        //         'formasdepago',
+        //         'productos',
+        //     ],
+        // ])->get();
 
 
 
