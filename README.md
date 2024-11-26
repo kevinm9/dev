@@ -123,3 +123,42 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+## docker
+
+usando docker:
+```
+docker compose up -d --build
+docker compose exec php bash
+composer setup
+```
+
+otros comandos:
+```
+docker compose down
+docker compose up -d
+
+docker stop $(docker ps -aq)  # Detener todos los contenedores
+docker rm $(docker ps -aq)    # Eliminar todos los contenedores
+docker rmi $(docker images -aq)  # Eliminar todas las imágenes (opcional)
+docker volume rm $(docker volume ls -q)  # Eliminar volúmenes (opcional)
+docker network rm $(docker network ls -q)  # Eliminar redes (opcional)
+docker system prune -a --volumes  # Limpiar todo lo no utilizado
+docker compose up -d --build  # Levantar contenedores desde cero
+```
+otras configuracion 
+phpmyadmin:
+volumes:
+    - .docker/phpmyadmin/sessions:/sessions
+```
+sudo chmod -R 777 .docker/phpmyadmin/sessions
+```
+esto le dara permiso para crear la sesion y poder ver phpmyadmin
+```
+Servidor:bd
+Usuario:root
+Contraseña:root
+```
+
+
