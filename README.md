@@ -132,6 +132,7 @@ usando docker:
 docker compose up -d --build
 docker compose exec php bash
 composer setup
+(caso de error borrar .lock.json)
 ```
 
 otros comandos:
