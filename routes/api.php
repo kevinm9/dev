@@ -33,7 +33,7 @@ Route::apiResource('productos', ProductoController::class);
 Route::apiResource('clientes', ClienteController::class);
 
 Route::post('registro', [AuthController::class, 'register']);
-Route::post('login', [AuthController::class, 'login']);
+Route::post('login', [AuthController::class, 'login'])->name('login');;
 
 
 Route::middleware('auth:sanctum')->group(function() {
