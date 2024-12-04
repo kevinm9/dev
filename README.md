@@ -126,6 +126,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 
 ## docker
+se migro a laravel 10 para usar sail 
 
 usando docker:
 ```
