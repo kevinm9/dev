@@ -132,6 +132,7 @@ usando docker:
 docker compose up -d --build
 docker compose exec php bash
 composer setup
+rm composer.lock (por si sale error de que no pueden instalar la dependecias del proyecto)
 ```
 
 otros comandos:
