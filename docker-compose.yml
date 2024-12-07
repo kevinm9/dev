@@ -29,21 +29,31 @@ services:
     ####################################################################################################
     # DATABASE (MySQL)
     ####################################################################################################
+
+
     db:
-        image: mysql:8.1
-        ports:
-            - 3306:3306
-        volumes:
-            - .docker/db/data:/var/lib/mysql
-            - .docker/db/logs:/var/log/mysql
-            - .docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
-            - .docker/db/sql:/docker-entrypoint-initdb.d
+        image: mysql:5.7
         container_name: db
+        ports:
+        - 3306:3306
+    #    descomentar para crear un volumen de datos para nuestra base de datos
+    #    nos permite conservar los datos de nuestro contenedor de bd
+    #    volumes:
+    #      - ./mysql-data:/var/lib/mysql
+    #      - C:\Users\hp\Documents\kevin\backend\src\main\resources\db=/var/lib/mysql
+    #    volumes:
+    #    - .docker/db/data:/var/lib/mysql
+    #    - .docker/logs:/var/log/mysql
+    #    - .docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
+    #    - .docker/db/sql:/docker-entrypoint-initdb.d
         environment:
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: laravel
-            MYSQL_USER: laravel
-            MYSQL_PASSWORD: laravel
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=laravel
+        - MYSQL_USER=laravel
+        - MYSQL_PASSWORD=laravel
+    #    networks:
+    #      - app-network
+        #restart: always
 
     # ####################################################################################################
     # # DATABASE (MariaDB)
